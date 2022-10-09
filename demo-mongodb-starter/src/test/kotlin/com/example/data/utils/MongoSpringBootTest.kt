@@ -1,4 +1,4 @@
-package com.example.database.utils
+package com.example.data.utils
 
 import org.springframework.boot.test.autoconfigure.data.mongo.AutoConfigureDataMongo
 import org.springframework.boot.test.context.SpringBootTest

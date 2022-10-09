@@ -1,12 +1,12 @@
-package com.example.database.dao
+package com.example.data.service
 
-import com.example.database.dto.DemoDto
-import com.example.database.mapper.DemoMapper
-import com.example.database.repository.DemoRepository
-import org.springframework.stereotype.Component
+import com.example.data.dto.DemoDto
+import com.example.data.mapper.DemoMapper
+import com.example.data.repository.DemoRepository
+import org.springframework.stereotype.Service
 
-@Component
-class DemoDao(
+@Service
+class DemoService(
     private val demoRepository: DemoRepository
 ) {
     fun insertDemo(demoDto: DemoDto) {

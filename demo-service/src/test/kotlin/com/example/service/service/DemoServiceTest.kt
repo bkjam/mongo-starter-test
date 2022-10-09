@@ -1,7 +1,7 @@
 package com.example.service.service
 
-import com.example.database.dao.DemoDao
-import com.example.database.dto.DemoDto
+import com.example.data.dao.DemoDao
+import com.example.data.dto.DemoDto
 import com.example.service.helper.MockitoHelper
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test

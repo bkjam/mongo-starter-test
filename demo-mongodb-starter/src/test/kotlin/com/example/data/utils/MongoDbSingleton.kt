@@ -1,4 +1,4 @@
-package com.example.database.utils
+package com.example.data.utils
 
 import org.testcontainers.containers.MongoDBContainer
 

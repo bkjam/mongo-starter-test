@@ -1,10 +1,10 @@
-package com.example.database
+package com.example.data
 
-import com.example.database.dao.DemoDao
-import com.example.database.dto.DemoDto
-import com.example.database.mapper.DemoMapper
-import com.example.database.repository.DemoRepository
-import com.example.database.utils.MongoSpringBootTest
+import com.example.data.dao.DemoDao
+import com.example.data.dto.DemoDto
+import com.example.data.mapper.DemoMapper
+import com.example.data.repository.DemoRepository
+import com.example.data.utils.MongoSpringBootTest
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test

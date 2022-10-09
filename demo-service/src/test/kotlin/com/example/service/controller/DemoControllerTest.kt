@@ -1,9 +1,8 @@
 package com.example.service.controller
 
-import com.example.database.dto.DemoDto
+import com.example.data.dto.DemoDto
 import com.example.service.service.DemoService
 import com.fasterxml.jackson.databind.ObjectMapper
-import org.hamcrest.Matchers
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito
 import org.springframework.beans.factory.annotation.Autowired

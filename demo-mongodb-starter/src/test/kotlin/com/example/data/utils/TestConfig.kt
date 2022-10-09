@@ -1,4 +1,4 @@
-package com.example.database.utils
+package com.example.data.utils
 
 import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Configuration

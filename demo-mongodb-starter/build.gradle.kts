@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-	id("java")
+	id("java-library")
 	id("org.springframework.boot") version "2.7.2"
 	id("io.spring.dependency-management") version "1.0.12.RELEASE"
 	kotlin("jvm")
@@ -17,7 +17,7 @@ repositories {
 dependencies {
 	// Spring Boot
 	implementation("org.springframework.boot:spring-boot-starter")
-	api("org.springframework.boot:spring-boot-starter-data-mongodb")
+	implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
 
 	// Kotlin
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
