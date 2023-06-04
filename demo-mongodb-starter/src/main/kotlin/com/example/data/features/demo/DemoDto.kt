@@ -1,4 +1,4 @@
-package com.example.data.dto
+package com.example.data.features.demo
 
 data class DemoDto(
     val id: String,

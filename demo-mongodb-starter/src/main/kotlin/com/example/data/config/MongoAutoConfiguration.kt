@@ -5,6 +5,6 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories
 
 @Configuration
-@EnableMongoRepositories(basePackages = ["com.example.data.repository"])
+@EnableMongoRepositories(basePackages = ["com.example.data"])
 @ComponentScan("com.example.data")
 class MongoAutoConfiguration

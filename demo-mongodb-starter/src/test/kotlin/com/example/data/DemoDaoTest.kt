@@ -1,9 +1,9 @@
 package com.example.data
 
-import com.example.data.dao.DemoDao
-import com.example.data.dto.DemoDto
-import com.example.data.mapper.DemoMapper
-import com.example.data.repository.DemoRepository
+import com.example.data.features.demo.DemoDao
+import com.example.data.features.demo.DemoDto
+import com.example.data.features.demo.DemoMapper
+import com.example.data.features.demo.DemoRepository
 import com.example.data.utils.MongoSpringBootTest
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions
@@ -23,12 +23,12 @@ class DemoDaoTest {
     }
 
     @Test
-    fun insertDemo_whenInsertingNewDemoObj_entityInDatabase() {
+    fun saveDemo_whenInsertingNewDemoObj_entityInDatabase() {
         // Arrange
         val demoDto = DemoDto(id = "testId", name = "testName")
 
         // Act
-        demoDao.insertDemo(demoDto)
+        demoDao.saveDemo(demoDto)
 
         // Assert
         Assertions.assertEquals(1, demoRepository.findAll().size)
@@ -50,13 +50,13 @@ class DemoDaoTest {
     }
 
     @Test
-    fun getDemo_whenRetrievingExistingDemoObj_returnsDemoDto() {
+    fun getDemoById_whenRetrievingExistingDemoObj_returnsDemoDto() {
         // Arrange
         val demoDto = DemoDto(id = "testId", name = "testName")
         demoRepository.save(DemoMapper.toEntity(demoDto))
 
         // Act
-        val retrievedDemoDto = demoDao.getDemo("testId")
+        val retrievedDemoDto = demoDao.getDemoById("testId")
 
         // Assert
         Assertions.assertNotNull(retrievedDemoDto)

@@ -1,4 +1,4 @@
-rootProject.name = "Testing Custom MongoDB Starter Library"
+rootProject.name = "MongoDB Starter Library"
 
 // order does matters
 include("demo-mongodb-starter")

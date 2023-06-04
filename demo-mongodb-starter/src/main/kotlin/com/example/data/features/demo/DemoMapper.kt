@@ -1,7 +1,7 @@
-package com.example.data.mapper
+package com.example.data.features.demo
 
-import com.example.data.dto.DemoDto
-import com.example.data.entity.DemoEntity
+import com.example.data.features.demo.DemoDto
+import com.example.data.features.demo.DemoEntity
 
 object DemoMapper {
     fun toDto(entity: DemoEntity): DemoDto {

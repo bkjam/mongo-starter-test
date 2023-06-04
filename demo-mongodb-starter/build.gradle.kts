@@ -2,8 +2,8 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
 	id("java-library")
-	id("org.springframework.boot") version "2.7.2"
-	id("io.spring.dependency-management") version "1.0.12.RELEASE"
+	id("org.springframework.boot") version "2.7.5"
+	id("io.spring.dependency-management") version "1.1.0"
 	kotlin("jvm")
 	kotlin("plugin.spring")
 }
@@ -25,7 +25,7 @@ dependencies {
 
 	// Test
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
-	testImplementation("org.testcontainers:mongodb:1.17.3")
+	testImplementation("org.testcontainers:mongodb:1.18.1")
 }
 
 tasks.withType<KotlinCompile> {
