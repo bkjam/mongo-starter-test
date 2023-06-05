@@ -1,5 +1,6 @@
 rootProject.name = "MongoDB Starter Library"
 
-// order does matters
-include("demo-mongodb-starter")
-include("demo-service")
+include("demo-mvc-mongodb-starter")
+include("demo-reactive-mongodb-starter")
+include("demo-mvc-service")
+include("demo-reactive-service")

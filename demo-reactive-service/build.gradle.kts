@@ -11,10 +11,10 @@ java.sourceCompatibility = JavaVersion.VERSION_11
 
 dependencies {
 	// Database Starter
-	implementation(project(":demo-mongodb-starter"))
+	implementation("org.springframework.boot:spring-boot-starter-data-mongodb-reactive")
 
 	// Web
-	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation("org.springframework.boot:spring-boot-starter-webflux")
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
 
 	// Kotlin
@@ -22,6 +22,10 @@ dependencies {
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+
+	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("org.testcontainers:mongodb:1.18.1")
+	testImplementation("io.projectreactor:reactor-test")
 }
 
 tasks {
