@@ -21,7 +21,7 @@ class DemoDao(
     fun deleteDemo(demoId: String, withTemplate: Boolean? = false) {
         if (withTemplate!!) {
             val query = Query(Criteria("_id").`is`(demoId))
-            demoTemplate.remove(query)
+            demoTemplate.findAndRemove(query, DemoEntity::class.java)
         } else {
             demoRepository.deleteById(demoId)
         }

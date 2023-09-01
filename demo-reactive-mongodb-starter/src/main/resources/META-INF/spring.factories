@@ -1,2 +1,3 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-    com.example.data.config.MongoAutoConfiguration
+    com.example.data.config.ReactiveMongoAutoConfiguration,\
+    org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration

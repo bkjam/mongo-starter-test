@@ -25,10 +25,25 @@ class DemoDaoTest {
     @Test
     fun saveDemo_whenInsertingNewDemoObj_entityInDatabase() {
         // Arrange
+        val useMongoTemplate = false
         val demoDto = DemoDto(id = "testId", name = "testName")
 
         // Act
-        demoDao.saveDemo(demoDto)
+        demoDao.saveDemo(demoDto, useMongoTemplate)
+
+        // Assert
+        Assertions.assertEquals(1, demoRepository.findAll().size)
+        Assertions.assertTrue(demoRepository.findById("testId").isPresent)
+    }
+
+    @Test
+    fun saveDemo_whenInsertingNewDemoObjUsingMongoTemplate_entityInDatabase() {
+        // Arrange
+        val useMongoTemplate = true
+        val demoDto = DemoDto(id = "testId", name = "testName")
+
+        // Act
+        demoDao.saveDemo(demoDto, useMongoTemplate)
 
         // Assert
         Assertions.assertEquals(1, demoRepository.findAll().size)
@@ -38,11 +53,27 @@ class DemoDaoTest {
     @Test
     fun deleteDemo_whenDeletingExistingDemoObj_entityNotInDatabase() {
         // Arrange
+        val useMongoTemplate = false
         val demoDto = DemoDto(id = "testId", name = "testName")
         demoRepository.save(DemoMapper.toEntity(demoDto))
 
         // Act
-        demoDao.deleteDemo("testId")
+        demoDao.deleteDemo("testId", useMongoTemplate)
+
+        // Assert
+        Assertions.assertEquals(0, demoRepository.findAll().size)
+        Assertions.assertFalse(demoRepository.findById("testId").isPresent)
+    }
+
+    @Test
+    fun deleteDemo_whenDeletingExistingDemoObjUsingMongoTemplate_entityNotInDatabase() {
+        // Arrange
+        val useMongoTemplate = true
+        val demoDto = DemoDto(id = "testId", name = "testName")
+        demoRepository.save(DemoMapper.toEntity(demoDto))
+
+        // Act
+        demoDao.deleteDemo("testId", useMongoTemplate)
 
         // Assert
         Assertions.assertEquals(0, demoRepository.findAll().size)
@@ -52,11 +83,27 @@ class DemoDaoTest {
     @Test
     fun getDemoById_whenRetrievingExistingDemoObj_returnsDemoDto() {
         // Arrange
+        val useMongoTemplate = false
         val demoDto = DemoDto(id = "testId", name = "testName")
         demoRepository.save(DemoMapper.toEntity(demoDto))
 
         // Act
-        val retrievedDemoDto = demoDao.getDemoById("testId")
+        val retrievedDemoDto = demoDao.getDemoById("testId", useMongoTemplate)
+
+        // Assert
+        Assertions.assertNotNull(retrievedDemoDto)
+        Assertions.assertEquals(demoDto, retrievedDemoDto)
+    }
+
+    @Test
+    fun getDemoById_whenRetrievingExistingDemoObjUsingMongoTemplate_returnsDemoDto() {
+        // Arrange
+        val useMongoTemplate = true
+        val demoDto = DemoDto(id = "testId", name = "testName")
+        demoRepository.save(DemoMapper.toEntity(demoDto))
+
+        // Act
+        val retrievedDemoDto = demoDao.getDemoById("testId", useMongoTemplate)
 
         // Assert
         Assertions.assertNotNull(retrievedDemoDto)

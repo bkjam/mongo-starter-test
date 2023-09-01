@@ -24,7 +24,7 @@ class DemoDao(
     fun deleteDemo(demoId: String, withTemplate: Boolean? = false): Mono<Void> {
         return if (withTemplate!!) {
             val query = Query(Criteria("_id").`is`(demoId))
-            demoTemplate.remove(query).then()
+            demoTemplate.findAndRemove(query, DemoEntity::class.java).then()
         } else {
             demoRepository.deleteById(demoId)
         }

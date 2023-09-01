@@ -28,6 +28,75 @@ gradle demo-mvc-service:bootrun             # Spring Web (MVC)
 gradle demo-reactive-service:bootrun        # Spring Webflux (Reactive)
 ```
 
+## Other Common Issues
+
+### Repository Bean Not Found
+
+```bash
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+Parameter 0 of constructor in com.example.data.features.demo.DemoDao
+required a bean of type 'com.example.data.features.demo.DemoRepository' 
+that could not be found.
+
+Action:
+Consider defining a bean of type 
+'com.example.data.features.demo.DemoRepository' in your configuration.
+```
+
+This probably occurs because the package name for the starter library is different from the Spring Boot application that
+is consuming it. Eg. `com.example.data` vs `com.example.app`. To resolve it, ensure that in the auto-configuration class,
+add `@EnableMongoRepositories`.
+
+```kotlin
+@Configuration
+@EnableMongoRepositories(basePackages = ["com.example.data"])
+@ComponentScan("com.example.data")
+class MongoAutoConfiguration
+```
+
+### DemoDAO has not been initialized
+
+```bash
+lateinit property demoDao has not been initialized
+kotlin.UninitializedPropertyAccessException: lateinit property demoDao has not been initialized
+```
+
+This error occurs when you are running your test cases without `@MongoSpringBootTest` annotation as the test cases do not
+know where the packages are found. Eg.
+
+```kotlin
+@Configuration
+@ComponentScan("com.example.data")
+class TestConfig
+```
+
+### MongoTemplate Bean Not Found
+
+```bash
+***************************
+APPLICATION FAILED TO START
+***************************
+Description:
+Parameter 0 of constructor in com.example.database.dao.DemoDao required a bean named 'mongoTemplate' that could not be found.
+Action:
+Consider defining a bean named 'mongoTemplate' in your configuration.
+```
+
+This error occurs because the tests cases are not configured with relevant configurations for MongoDB tests. Make sure that
+in your `@MongoSpringBootTest`, you add the annotation `@AutoConfigureDataMongo`. Eg.
+
+```kotlin
+@Target(AnnotationTarget.CLASS)
+@SpringBootTest(classes = [TestConfig::class])
+@ContextConfiguration(initializers = [MongoInitializer::class])
+@AutoConfigureDataMongo
+annotation class MongoSpringBootTest
+```
+
 ## References
 
 - [https://nexocode.com/blog/posts/fast-stable-mongodb-tests-spring](https://nexocode.com/blog/posts/fast-stable-mongodb-tests-spring)

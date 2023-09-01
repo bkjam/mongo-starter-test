@@ -1,4 +1,4 @@
-rootProject.name = "MongoDB Starter Library"
+rootProject.name = "MongoDB Integration Testing"
 
 include("demo-mvc-mongodb-starter")
 include("demo-reactive-mongodb-starter")

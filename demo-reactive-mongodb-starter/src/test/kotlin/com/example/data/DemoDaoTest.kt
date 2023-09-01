@@ -20,10 +20,28 @@ class DemoDaoTest {
     @Test
     fun saveDemo_whenInsertingNewDemoObj_entityInDatabase() {
         // Arrange
+        val usingMongoTemplate = false
         val demoDto = DemoDto(id = "testId", name = "testName")
 
         // Act
-        val source = demoDao.saveDemo(demoDto)
+        val source = demoDao.saveDemo(demoDto, usingMongoTemplate)
+
+        // Assert
+        StepVerifier.create(source)
+            .assertNext {
+                Assertions.assertEquals("testId", it.id)
+            }
+            .verifyComplete()
+    }
+
+    @Test
+    fun saveDemo_whenInsertingNewDemoObjWithMongoTemplate_entityInDatabase() {
+        // Arrange
+        val usingMongoTemplate = true
+        val demoDto = DemoDto(id = "testId", name = "testName")
+
+        // Act
+        val source = demoDao.saveDemo(demoDto, usingMongoTemplate)
 
         // Assert
         StepVerifier.create(source)
@@ -36,11 +54,27 @@ class DemoDaoTest {
     @Test
     fun deleteDemo_whenDeletingExistingDemoObj_entityNotInDatabase() {
         // Arrange
+        val usingMongoTemplate = false
         val demoDto = DemoDto(id = "testId", name = "testName")
 
         // Act
         val source = demoRepository.save(DemoMapper.toEntity(demoDto))
-            .flatMap { demoDao.deleteDemo(it.id) }
+            .flatMap { demoDao.deleteDemo(it.id, usingMongoTemplate) }
+            .flatMap { demoRepository.findAll().collectList() }
+
+        // Assert
+        StepVerifier.create(source).expectNextCount(0).verifyComplete()
+    }
+
+    @Test
+    fun deleteDemo_whenDeletingExistingDemoObjWithMongoTemplate_entityNotInDatabase() {
+        // Arrange
+        val usingMongoTemplate = true
+        val demoDto = DemoDto(id = "testId", name = "testName")
+
+        // Act
+        val source = demoRepository.save(DemoMapper.toEntity(demoDto))
+            .flatMap { demoDao.deleteDemo(it.id, usingMongoTemplate) }
             .flatMap { demoRepository.findAll().collectList() }
 
         // Assert
@@ -50,11 +84,30 @@ class DemoDaoTest {
     @Test
     fun getDemoById_whenRetrievingExistingDemoObj_returnsDemoDto() {
         // Arrange
+        val usingMongoTemplate = false
         val demoDto = DemoDto(id = "testId", name = "testName")
 
         // Act
         val source = demoRepository.save(DemoMapper.toEntity(demoDto))
-            .flatMap { demoDao.getDemoById(it.id) }
+            .flatMap { demoDao.getDemoById(it.id, usingMongoTemplate) }
+
+        // Assert
+        StepVerifier.create(source)
+            .assertNext {
+                Assertions.assertEquals("testId", it.id)
+            }
+            .verifyComplete()
+    }
+
+    @Test
+    fun getDemoById_whenRetrievingExistingDemoObjWithMongoTemplate_returnsDemoDto() {
+        // Arrange
+        val usingMongoTemplate = true
+        val demoDto = DemoDto(id = "testId", name = "testName")
+
+        // Act
+        val source = demoRepository.save(DemoMapper.toEntity(demoDto))
+            .flatMap { demoDao.getDemoById(it.id, usingMongoTemplate) }
 
         // Assert
         StepVerifier.create(source)
